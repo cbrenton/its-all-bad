@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://m4khmmu7opwa"]
 
+[ext_resource type="Script" uid="uid://dudxcvf2pynrh" path="res://Gun.cs" id="1_dk5gl"]
 [ext_resource type="Texture2D" uid="uid://bt4hga610fg7d" path="res://assets/gun.png" id="1_vk1bi"]
 
 [node name="Gun" type="RigidBody2D" unique_id=1734403121]
+collision_layer = 8
+script = ExtResource("1_dk5gl")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=608752742]
 scale = Vector2(0.1, 0.1)

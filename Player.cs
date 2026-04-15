@@ -28,19 +28,29 @@ public partial class Player : CharacterBody2D
 
   private Sprite2D Sprite;
 
+  [Signal]
+  public delegate void WinSignalEventHandler(int playerNumber);
+
   public override void _Ready() {
     Sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
-    TheGun = GetTree().GetFirstNodeInGroup("gun") as Gun;
+    // TheGun = GetTree().GetFirstNodeInGroup("gun") as Gun;
     GunAnchor = GetNodeOrNull<Node2D>("GunAnchor");
     GD.PrintErr($"gun: {TheGun}");
+    // WinSignal += Foo;
+    WinSignal += GetParent<Game>().RegisterWinner;
   }
 
-  public void Initialize(string playerName) {
-    LeftAction = $"{playerName}_left";
-    RightAction = $"{playerName}_right";
-    ShootAction = $"{playerName}_shoot";
-    JumpAction = $"{playerName}_jump";
-    UseAction = $"{playerName}_use";
+  public void Foo(int playerNumber) {
+    GD.Print($"foo {playerNumber}");
+  }
+
+  public void Initialize(int playerNumber, Gun theGun) {
+    LeftAction = $"p{playerNumber}_left";
+    RightAction = $"p{playerNumber}_right";
+    ShootAction = $"p{playerNumber}_shoot";
+    JumpAction = $"p{playerNumber}_jump";
+    UseAction = $"p{playerNumber}_use";
+    TheGun = theGun;
   }
 
 	public override void _PhysicsProcess(double delta) {
@@ -105,6 +115,7 @@ public partial class Player : CharacterBody2D
         var other = gun.Shooty.GetCollider();
         if (other is Player hitNode) {
           GD.Print($"hit node: {hitNode.Name}");
+          EmitSignal(SignalName.WinSignal, 1);
         }
       }
     } else {
