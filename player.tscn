@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://ctcuk1f1ainm2"]
+
+[ext_resource type="Script" uid="uid://cwsr1oex3npwn" path="res://Player.cs" id="1_bxx23"]
+[ext_resource type="Texture2D" uid="uid://2ehkkgvoo27b" path="res://assets/sprite.png" id="2_qh3su"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e2o6t"]
+size = Vector2(40, 104)
+
+[node name="Player1" type="CharacterBody2D" unique_id=1248451482]
+script = ExtResource("1_bxx23")
+Speed = 500.0
+GravityFactor = 2.6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2049197763]
+shape = SubResource("RectangleShape2D_e2o6t")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1441193442]
+position = Vector2(0, -12.999999)
+scale = Vector2(2.0625, 2.0625)
+texture = ExtResource("2_qh3su")
+
+[node name="GunAnchor" type="Node2D" parent="." unique_id=279434235]
+position = Vector2(27, -5)

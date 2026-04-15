@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://m4khmmu7opwa"]
+
+[ext_resource type="Texture2D" uid="uid://bt4hga610fg7d" path="res://assets/gun.png" id="1_vk1bi"]
+
+[node name="Gun" type="RigidBody2D" unique_id=1734403121]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=608752742]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_vk1bi")
+flip_h = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1172371771]
+scale = Vector2(0.1, 0.1)
+polygon = PackedVector2Array(-89.99999, 159.99998, 229.99998, -59.999992, 229.99998, -149.99998, -189.99998, -149.99998, -229.99998, 139.99998)
+
+[node name="Shooty" type="RayCast2D" parent="." unique_id=1048657922]
+target_position = Vector2(1000, 0)
+collision_mask = 6

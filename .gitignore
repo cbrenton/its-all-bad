@@ -1,0 +1,24 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+.import/
+export.cfg
+export_credentials.cfg
+*.tmp
+*.translation
+
+# C# / .NET
+[Bb]in/
+[Oo]bj/
+*.sln
+*.csproj
+# Note: Keep .csproj and .sln if you want others to open the project in IDEs immediately.
+# However, Godot can regenerate these via Project > Tools > C# > Create Solution.
+
+# IDEs and Tools
+.vscode/
+.idea/
+*.swp
+*.swo
+Thumbs.db
+.DS_Store
