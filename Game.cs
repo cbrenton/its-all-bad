@@ -68,8 +68,8 @@ public partial class Game : Node2D
     IsGameWon = false;
   }
 
-  public void RegisterWinner(int playerNumber) {
-    WinLossLabel.Text = $"Player {playerNumber} wins!";
+  public void RegisterWinner(Player winner) {
+    WinLossLabel.Text = $"Player {winner.PlayerNumber} wins!";
     WinLossLabel.Visible = true;
 
     IsGameWon = true;
@@ -78,6 +78,14 @@ public partial class Game : Node2D
     var players = GetChildren().OfType<Player>().ToList();
     foreach (var player in players) {
       player.InputEnabled = false;
+    }
+  }
+
+  public void TryPickUpObject(Player player) {
+    var guns = GetChildren().OfType<Gun>().ToList();
+    // NOTE: if you add multiple guns you should probably change this to only grab the closest one
+    foreach (var existingGun in guns) {
+      player.TryPickUpGun(existingGun);
     }
   }
 }

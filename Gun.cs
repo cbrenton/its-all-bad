@@ -3,7 +3,6 @@ using System;
 
 public partial class Gun : RigidBody2D
 {
-  public Player PlayerOwner { get; private set; } = null;
   [Export]
   public float HoldDistance = 1.0f;
   [Export]
@@ -26,7 +25,6 @@ public partial class Gun : RigidBody2D
     MaxContactsReported = 4;
 
     BodyShapeEntered += (a, b, c, d) => {
-      GD.Print($"boom {LinearVelocity.Length()}");
       if (LinearVelocity.Length() > 50) {
          Boing.VolumeLinear = LinearVelocity.Length() / 100;
          Boing.Play();
@@ -40,8 +38,7 @@ public partial class Gun : RigidBody2D
     FireCooldown -= delta;
 	}
 
-  public void PickUp(Player player) {
-    PlayerOwner = player;
+  public void MoveToPlayer(Player player) {
     Freeze = true;
     FreezeMode = RigidBody2D.FreezeModeEnum.Kinematic;
     Reparent(player.GunAnchor);
@@ -52,21 +49,17 @@ public partial class Gun : RigidBody2D
   public void Drop() {
     Reparent(GetTree().CurrentScene);
     Freeze = false;
-    PlayerOwner = null;
   }
 
-  public bool IsHeldBy(Player player) {
-    return PlayerOwner == player;
-  }
-
-  public void Shoot(Player shooter) {
+  public bool Shoot(Player shooter) {
+    bool didHitPlayer = false;
     if (FireCooldown < 0.0f) {
       FireCooldown = FireRate;
       if (Shooty.IsColliding()) {
         var other = Shooty.GetCollider();
         if (other is Player hitNode) {
           GD.Print($"hit node: {hitNode.Name}");
-          shooter.EmitSignal(Player.SignalName.WinSignal, 1);
+          didHitPlayer = true;
         }
       }
       AudioStreamPlayer2D gunshot = GetNodeOrNull<AudioStreamPlayer2D>("GunshotStream");
@@ -76,5 +69,6 @@ public partial class Gun : RigidBody2D
     } else {
       GD.Print($"click {FireCooldown}");
     }
+    return didHitPlayer;
   }
 }

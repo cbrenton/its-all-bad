@@ -16,7 +16,7 @@ public partial class Player : CharacterBody2D
   [Export]
   public string JumpAction;
   [Export]
-  public string ShootAction;
+  public string AttackAction;
   [Export]
   public string UseAction;
   [Export]
@@ -25,27 +25,31 @@ public partial class Player : CharacterBody2D
   public Vector2 LookDir = new Vector2(1.0f, 0.0f);
   public bool InputEnabled = true;
 
+  public int PlayerNumber;
   private Gun HeldGun;
 
   private Sprite2D Sprite;
 
   [Signal]
-  public delegate void WinSignalEventHandler(int playerNumber);
+  public delegate void WinSignalEventHandler(Player player);
+  [Signal]
+  public delegate void PickupSignalEventHandler(Player player);
 
   public override void _Ready() {
     Sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
     GunAnchor = GetNodeOrNull<Node2D>("GunAnchor");
     GD.PrintErr($"gun: {HeldGun}");
     WinSignal += GetParent<Game>().RegisterWinner;
+    PickupSignal += GetParent<Game>().TryPickUpObject;
   }
 
   public void Initialize(int playerNumber, Gun theGun) {
     LeftAction = $"p{playerNumber}_left";
     RightAction = $"p{playerNumber}_right";
-    ShootAction = $"p{playerNumber}_shoot";
+    AttackAction = $"p{playerNumber}_shoot";
     JumpAction = $"p{playerNumber}_jump";
     UseAction = $"p{playerNumber}_use";
-    HeldGun = theGun;
+    PlayerNumber = playerNumber;
   }
 
 	public override void _PhysicsProcess(double delta) {
@@ -86,31 +90,27 @@ public partial class Player : CharacterBody2D
       Vector2 velocity = new Vector2(Velocity.X, JumpVelocity);
       Velocity = velocity;
     }
-    if (e.IsActionPressed(ShootAction)) {
-      TryShoot();
+    if (e.IsActionPressed(AttackAction)) {
+      TryAttack();
     }
     if (e.IsActionPressed(UseAction)) {
-      GD.Print("action taken");
-      TryPickUpGun(HeldGun);
+      EmitSignal(SignalName.PickupSignal, this);
     }
   }
 
   public void TryPickUpGun(Gun gun) {
-    GD.Print("trying to pick up gun");
-    Vector2 toGun = HeldGun.GlobalPosition - GlobalPosition;
-    GD.Print($"{toGun}");
+    Vector2 toGun = gun.GlobalPosition - GlobalPosition;
     if (toGun.Length() <= 100.0f && toGun.Dot(LookDir) > 0) {
-      GD.Print("picked up gun");
-      gun.PickUp(this);
+      HeldGun = gun;
+      gun.MoveToPlayer(this);
     }
-    GD.Print("failed to pick up gun");
   }
 
-  public void TryShoot() {
+  public void TryAttack() {
     if (HasGun()) {
-      HeldGun.Shoot(this);
-    } else {
-      GD.Print("uhhhh nothing happened");
+      if (HeldGun.Shoot(this)) {
+        EmitSignal(SignalName.WinSignal, this);
+      }
     }
   }
 
