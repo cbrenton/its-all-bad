@@ -10,6 +10,7 @@ public partial class Gun : RigidBody2D
   public double FireRate = 0.5f;
   public RayCast2D Shooty;
   private Sprite2D Sprite;
+  private AnimationPlayer ShootAnimation;
   private double FireCooldown;
 
 	// Called when the node enters the scene tree for the first time.
@@ -17,6 +18,7 @@ public partial class Gun : RigidBody2D
 	{
     Sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
     Shooty = GetNodeOrNull<RayCast2D>("Shooty");
+    ShootAnimation = GetNodeOrNull<AnimationPlayer>("GunshotAnimation");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -55,10 +57,7 @@ public partial class Gun : RigidBody2D
       }
       AudioStreamPlayer2D gunshot = GetNodeOrNull<AudioStreamPlayer2D>("GunshotStream");
       gunshot.Play();
-      if (gunshot == null) {
-        GD.Print("null gunshot");
-        return;
-      }
+      ShootAnimation.Play("gunshot");
       GD.Print($"bam! {FireCooldown} {gunshot}");
       FireCooldown = FireRate;
     } else {
