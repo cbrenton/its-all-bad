@@ -4,6 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://bt4hga610fg7d" path="res://assets/gun.png" id="1_vk1bi"]
 [ext_resource type="AudioStream" uid="uid://2jq33n61hmj7" path="res://assets/gunshot.mp3" id="3_kw0bs"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kw0bs"]
+bounce = 0.5
+
 [sub_resource type="Animation" id="Animation_kw0bs"]
 length = 0.001
 tracks/0/type = "value"
@@ -53,10 +56,10 @@ tracks/1/path = NodePath(".:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.13333334),
+"times": PackedFloat32Array(0.06666667, 0.16666667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, 11)]
+"values": [Vector2(0, -20), Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7vd5q"]
@@ -67,6 +70,7 @@ _data = {
 
 [node name="Gun" type="RigidBody2D" unique_id=1734403121]
 collision_layer = 8
+physics_material_override = SubResource("PhysicsMaterial_kw0bs")
 script = ExtResource("1_dk5gl")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=608752742]

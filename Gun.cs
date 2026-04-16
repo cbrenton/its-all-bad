@@ -48,6 +48,7 @@ public partial class Gun : RigidBody2D
 
   public void Shoot(Player shooter) {
     if (FireCooldown < 0.0f) {
+      FireCooldown = FireRate;
       if (Shooty.IsColliding()) {
         var other = Shooty.GetCollider();
         if (other is Player hitNode) {
@@ -59,7 +60,6 @@ public partial class Gun : RigidBody2D
       gunshot.Play();
       ShootAnimation.Play("gunshot");
       GD.Print($"bam! {FireCooldown} {gunshot}");
-      FireCooldown = FireRate;
     } else {
       GD.Print($"click {FireCooldown}");
     }
