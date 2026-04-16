@@ -10,9 +10,12 @@ public partial class Game : Node2D
   public PackedScene GunScene;
   [Export]
   public Label WinLossLabel;
+  [Export]
+  public ColorRect BlackLayer;
 
   private bool IsGameWon = false;
   private Random Rand = new Random();
+  private Tween FadeTween;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -66,6 +69,9 @@ public partial class Game : Node2D
     WinLossLabel.Visible = false;
 
     IsGameWon = false;
+
+    FadeTween.Kill();
+    BlackLayer.Modulate = new Color(0, 0, 0, 0);
   }
 
   public void RegisterWinner(Player winner) {
@@ -79,6 +85,7 @@ public partial class Game : Node2D
     foreach (var player in players) {
       player.InputEnabled = false;
     }
+    FadeToBlack();
   }
 
   public void TryPickUpObject(Player player) {
@@ -88,5 +95,10 @@ public partial class Game : Node2D
     foreach (var existingGun in guns) {
       player.TryPickUpGun(existingGun);
     }
+  }
+
+  public void FadeToBlack() {
+    FadeTween = CreateTween();
+    FadeTween.TweenProperty(BlackLayer, "modulate:a", 1.0, 2.0);
   }
 }

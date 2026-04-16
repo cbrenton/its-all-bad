@@ -9,7 +9,7 @@ public partial class Gun : RigidBody2D
   public double FireRate = 0.5f;
   public RayCast2D Shooty;
   private Sprite2D Sprite;
-  private AnimationPlayer ShootAnimation;
+  private AnimationPlayer GunAnimator;
   private double FireCooldown;
   private AudioStreamPlayer2D Boing;
 
@@ -19,7 +19,7 @@ public partial class Gun : RigidBody2D
     Boing = GetNodeOrNull<AudioStreamPlayer2D>("BounceStream");
     Sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
     Shooty = GetNodeOrNull<RayCast2D>("Shooty");
-    ShootAnimation = GetNodeOrNull<AnimationPlayer>("GunshotAnimation");
+    GunAnimator = GetNodeOrNull<AnimationPlayer>("GunAnimator");
 
     ContactMonitor = true;
     MaxContactsReported = 4;
@@ -67,7 +67,7 @@ public partial class Gun : RigidBody2D
       }
       AudioStreamPlayer2D gunshot = GetNodeOrNull<AudioStreamPlayer2D>("GunshotStream");
       gunshot.Play();
-      ShootAnimation.Play("gunshot");
+      GunAnimator.Play("gunshot");
       GD.Print($"bam! {FireCooldown} {gunshot}");
     } else {
       GD.Print($"click {FireCooldown}");

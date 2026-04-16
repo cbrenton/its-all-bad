@@ -90,7 +90,7 @@ collision_mask = 6
 [node name="GunshotStream" type="AudioStreamPlayer2D" parent="." unique_id=1869072336]
 stream = ExtResource("3_kw0bs")
 
-[node name="GunshotAnimation" type="AnimationPlayer" parent="." unique_id=1677351491]
+[node name="GunAnimator" type="AnimationPlayer" parent="." unique_id=1677351491]
 libraries/ = SubResource("AnimationLibrary_7vd5q")
 
 [node name="BounceStream" type="AudioStreamPlayer2D" parent="." unique_id=739435775]

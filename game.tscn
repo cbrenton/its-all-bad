@@ -13,16 +13,18 @@ size = Vector2(1155, 180)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_80nbo"]
 size = Vector2(100, 647)
 
-[node name="Node2D" type="Node2D" unique_id=1443946768 node_paths=PackedStringArray("WinLossLabel")]
+[node name="Node2D" type="Node2D" unique_id=1443946768 node_paths=PackedStringArray("WinLossLabel", "BlackLayer")]
 script = ExtResource("1_fc0e3")
 PlayerScene = ExtResource("1_80nbo")
 GunScene = ExtResource("2_e2o6t")
 WinLossLabel = NodePath("HUD/WinLossLabel")
+BlackLayer = NodePath("CanvasLayer/BlackScreen")
 
 [node name="Gun" parent="." unique_id=1734403121 groups=["gun"] instance=ExtResource("2_e2o6t")]
 visible = false
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=743213042]
+layer = 2
 
 [node name="WinLossLabel" type="Label" parent="HUD" unique_id=1985342364]
 offset_left = 467.0
@@ -94,3 +96,11 @@ offset_bottom = 648.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall" unique_id=286062151]
 position = Vector2(1106, 324)
 shape = SubResource("RectangleShape2D_80nbo")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1042433280]
+
+[node name="BlackScreen" type="ColorRect" parent="CanvasLayer" unique_id=2075297620]
+modulate = Color(1, 1, 1, 0)
+offset_right = 1154.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
