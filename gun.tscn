@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dudxcvf2pynrh" path="res://Gun.cs" id="1_dk5gl"]
 [ext_resource type="Texture2D" uid="uid://bt4hga610fg7d" path="res://assets/gun.png" id="1_vk1bi"]
 [ext_resource type="AudioStream" uid="uid://2jq33n61hmj7" path="res://assets/gunshot.mp3" id="3_kw0bs"]
+[ext_resource type="AudioStream" uid="uid://dp84nhs58htf7" path="res://assets/boing.mp3" id="4_8iju2"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kw0bs"]
 bounce = 0.5
@@ -91,3 +92,6 @@ stream = ExtResource("3_kw0bs")
 
 [node name="GunshotAnimation" type="AnimationPlayer" parent="." unique_id=1677351491]
 libraries/ = SubResource("AnimationLibrary_7vd5q")
+
+[node name="BounceStream" type="AudioStreamPlayer2D" parent="." unique_id=739435775]
+stream = ExtResource("4_8iju2")
