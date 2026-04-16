@@ -21,6 +21,8 @@ public partial class Player : CharacterBody2D
   public string UseAction;
   [Export]
   public Node2D GunAnchor;
+  [Export]
+  public PackedScene BloodParticles = null;
 
   public Vector2 LookDir = new Vector2(1.0f, 0.0f);
   public bool InputEnabled = true;
@@ -39,6 +41,7 @@ public partial class Player : CharacterBody2D
     Sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
     GunAnchor = GetNodeOrNull<Node2D>("GunAnchor");
     GD.PrintErr($"gun: {HeldGun}");
+
     WinSignal += GetParent<Game>().RegisterWinner;
     PickupSignal += GetParent<Game>().TryPickUpObject;
   }
@@ -56,22 +59,19 @@ public partial class Player : CharacterBody2D
 		Vector2 velocity = Velocity;
 
 		// Add the gravity.
-		if (!IsOnFloor())
-		{
+		if (!IsOnFloor()) {
 			velocity += GetGravity() * GravityFactor * (float)delta;
 		}
 
     float dirX = 0;
     if (InputEnabled) {
       // Handle Jump.
-      if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
-      {
+      if (Input.IsActionJustPressed("ui_accept") && IsOnFloor()) {
         velocity.Y = JumpVelocity;
       }
 
       dirX = Input.GetAxis(LeftAction, RightAction);
-      if (dirX != 0)
-      {
+      if (dirX != 0) {
         float sign = Mathf.Sign(dirX);
         LookDir = new Vector2(sign, 0);
         Sprite.FlipH = dirX < 0;
@@ -86,20 +86,25 @@ public partial class Player : CharacterBody2D
   }
 
   public override void _Input(InputEvent e) {
-    if (e.IsActionPressed(JumpAction) && IsOnFloor()) {
-      Vector2 velocity = new Vector2(Velocity.X, JumpVelocity);
-      Velocity = velocity;
-    }
-    if (e.IsActionPressed(AttackAction)) {
-      TryAttack();
-    }
-    if (e.IsActionPressed(UseAction)) {
-      EmitSignal(SignalName.PickupSignal, this);
+    if (InputEnabled) {
+      if (e.IsActionPressed(JumpAction) && IsOnFloor()) {
+        Vector2 velocity = new Vector2(Velocity.X, JumpVelocity);
+        Velocity = velocity;
+      }
+      if (e.IsActionPressed(AttackAction)) {
+        GD.Print("attack");
+        TryAttack();
+      }
+      if (e.IsActionPressed(UseAction)) {
+        GD.Print("use");
+        EmitSignal(SignalName.PickupSignal, this);
+      }
     }
   }
 
   public void TryPickUpGun(Gun gun) {
     Vector2 toGun = gun.GlobalPosition - GlobalPosition;
+    GD.Print($"{toGun.Length()}");
     if (toGun.Length() <= 100.0f && toGun.Dot(LookDir) > 0) {
       HeldGun = gun;
       gun.MoveToPlayer(this);
@@ -116,5 +121,13 @@ public partial class Player : CharacterBody2D
 
   public bool HasGun() {
     return HeldGun != null;
+  }
+
+  public void Bleed(Vector2 dir) {
+    if (BloodParticles != null) {
+      Blood blood = BloodParticles.Instantiate<Blood>();
+      blood.SetDirection(dir);
+      AddChild(blood);
+    }
   }
 }

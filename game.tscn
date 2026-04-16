@@ -21,7 +21,6 @@ WinLossLabel = NodePath("HUD/WinLossLabel")
 
 [node name="Gun" parent="." unique_id=1734403121 groups=["gun"] instance=ExtResource("2_e2o6t")]
 visible = false
-position = Vector2(577, -106.000015)
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=743213042]
 

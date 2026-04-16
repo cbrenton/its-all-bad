@@ -60,6 +60,9 @@ public partial class Gun : RigidBody2D
         if (other is Player hitNode) {
           GD.Print($"hit node: {hitNode.Name}");
           didHitPlayer = true;
+          var bloodDir = (hitNode.Position - shooter.Position).Normalized();
+          GD.Print(bloodDir);
+          hitNode.Bleed(bloodDir);
         }
       }
       AudioStreamPlayer2D gunshot = GetNodeOrNull<AudioStreamPlayer2D>("GunshotStream");

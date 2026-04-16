@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://byme5ya5e2svl"]
+
+[ext_resource type="Texture2D" uid="uid://ddpemyc0k2hy6" path="res://assets/blood_texture.png" id="1_44s4y"]
+[ext_resource type="Script" uid="uid://dmxug730dkth8" path="res://Blood.cs" id="2_6b75d"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hqtel"]
+particle_flag_disable_z = true
+spread = 44.598
+initial_velocity_min = 600.0
+initial_velocity_max = 4000.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -290.0
+linear_accel_max = -50.0
+damping_min = 12000.0
+damping_max = 12000.0
+scale_min = 0.5
+color = Color(18.892157, 0, 0, 1)
+
+[node name="GPUParticles2D" type="GPUParticles2D" unique_id=494426932]
+emitting = false
+amount = 200
+texture = ExtResource("1_44s4y")
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_hqtel")
+script = ExtResource("2_6b75d")

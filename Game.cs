@@ -82,6 +82,7 @@ public partial class Game : Node2D
   }
 
   public void TryPickUpObject(Player player) {
+    GD.Print($"player {player.PlayerNumber} picking up");
     var guns = GetChildren().OfType<Gun>().ToList();
     // NOTE: if you add multiple guns you should probably change this to only grab the closest one
     foreach (var existingGun in guns) {

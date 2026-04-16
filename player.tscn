@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cwsr1oex3npwn" path="res://Player.cs" id="1_bxx23"]
 [ext_resource type="Texture2D" uid="uid://2ehkkgvoo27b" path="res://assets/sprite.png" id="2_qh3su"]
+[ext_resource type="PackedScene" uid="uid://byme5ya5e2svl" path="res://blood.tscn" id="3_i3pqv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e2o6t"]
 size = Vector2(40, 104)
@@ -10,6 +11,7 @@ size = Vector2(40, 104)
 script = ExtResource("1_bxx23")
 Speed = 500.0
 GravityFactor = 2.6
+BloodParticles = ExtResource("3_i3pqv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2049197763]
 shape = SubResource("RectangleShape2D_e2o6t")
