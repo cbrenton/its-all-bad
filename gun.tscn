@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dudxcvf2pynrh" path="res://Gun.cs" id="1_dk5gl"]
 [ext_resource type="Texture2D" uid="uid://bt4hga610fg7d" path="res://assets/gun.png" id="1_vk1bi"]
+[ext_resource type="AudioStream" uid="uid://2jq33n61hmj7" path="res://assets/gunshot.mp3" id="3_kw0bs"]
 
 [node name="Gun" type="RigidBody2D" unique_id=1734403121]
 collision_layer = 8
@@ -19,3 +20,6 @@ polygon = PackedVector2Array(-89.99999, 159.99998, 229.99998, -59.999992, 229.99
 [node name="Shooty" type="RayCast2D" parent="." unique_id=1048657922]
 target_position = Vector2(1000, 0)
 collision_mask = 6
+
+[node name="GunshotStream" type="AudioStreamPlayer2D" parent="." unique_id=1869072336]
+stream = ExtResource("3_kw0bs")

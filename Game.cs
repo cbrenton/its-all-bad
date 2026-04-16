@@ -47,7 +47,7 @@ public partial class Game : Node2D
 
     // spawn gun
     Gun gun = GunScene.Instantiate<Gun>();
-    gun.Position = new Vector2(577, -106);
+    gun.Position = new Vector2(577, 0);
     AddChild(gun);
     int sign = Rand.Next(0, 2) == 0 ? -1 : 1;
     gun.ApplyCentralImpulse(new Vector2(sign * Rand.Next(100, 200), 100));
@@ -77,7 +77,7 @@ public partial class Game : Node2D
     // freeze players
     var players = GetChildren().OfType<Player>().ToList();
     foreach (var player in players) {
-      player.ProcessMode = Node.ProcessModeEnum.Disabled;
+      player.InputEnabled = false;
     }
   }
 }

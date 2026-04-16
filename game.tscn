@@ -4,69 +4,20 @@
 [ext_resource type="Script" uid="uid://bij3pwg4vesxt" path="res://Game.cs" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://m4khmmu7opwa" path="res://gun.tscn" id="2_e2o6t"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_fc0e3"]
+font_size = 32
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mwb40"]
 size = Vector2(1155, 180)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_80nbo"]
 size = Vector2(100, 647)
 
-[sub_resource type="LabelSettings" id="LabelSettings_fc0e3"]
-font_size = 32
-
 [node name="Node2D" type="Node2D" unique_id=1443946768 node_paths=PackedStringArray("WinLossLabel")]
 script = ExtResource("1_fc0e3")
 PlayerScene = ExtResource("1_80nbo")
 GunScene = ExtResource("2_e2o6t")
 WinLossLabel = NodePath("HUD/WinLossLabel")
-
-[node name="Ceiling" type="StaticBody2D" parent="." unique_id=1890244800]
-position = Vector2(0, 113)
-scale = Vector2(0.47, 1)
-
-[node name="ColorRect" type="ColorRect" parent="Ceiling" unique_id=1767854343]
-offset_left = -1.0
-offset_top = -146.0
-offset_right = 1154.0
-offset_bottom = 34.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=266696718]
-position = Vector2(577, -53)
-shape = SubResource("RectangleShape2D_mwb40")
-
-[node name="Ceiling2" type="StaticBody2D" parent="." unique_id=1947295707]
-position = Vector2(613, 113)
-scale = Vector2(0.47, 1)
-
-[node name="ColorRect" type="ColorRect" parent="Ceiling2" unique_id=521324756]
-offset_left = -1.0
-offset_top = -146.0
-offset_right = 1154.0
-offset_bottom = 34.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling2" unique_id=2127029512]
-position = Vector2(577, -53)
-shape = SubResource("RectangleShape2D_mwb40")
-
-[node name="LeftWall" type="StaticBody2D" parent="." unique_id=584442442]
-
-[node name="ColorRect" type="ColorRect" parent="LeftWall" unique_id=1584251303]
-offset_right = 100.0
-offset_bottom = 648.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall" unique_id=2098575796]
-position = Vector2(50, 323.5)
-shape = SubResource("RectangleShape2D_80nbo")
-
-[node name="RightWall" type="StaticBody2D" parent="." unique_id=510364795]
-
-[node name="ColorRect" type="ColorRect" parent="RightWall" unique_id=1532236486]
-offset_left = 1056.0
-offset_right = 1156.0
-offset_bottom = 648.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" unique_id=286062151]
-position = Vector2(1106, 324)
-shape = SubResource("RectangleShape2D_80nbo")
 
 [node name="Gun" parent="." unique_id=1734403121 groups=["gun"] instance=ExtResource("2_e2o6t")]
 visible = false
@@ -93,3 +44,54 @@ offset_bottom = 648.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor2" unique_id=43135581]
 position = Vector2(576.5, 558)
 shape = SubResource("RectangleShape2D_mwb40")
+
+[node name="Walls" type="Node2D" parent="." unique_id=1748516009]
+
+[node name="Ceiling" type="StaticBody2D" parent="Walls" unique_id=1890244800]
+position = Vector2(0, 113)
+scale = Vector2(0.47, 1)
+
+[node name="ColorRect" type="ColorRect" parent="Walls/Ceiling" unique_id=1767854343]
+offset_left = -1.0
+offset_top = -146.0
+offset_right = 1154.0
+offset_bottom = 34.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Ceiling" unique_id=266696718]
+position = Vector2(577, -53)
+shape = SubResource("RectangleShape2D_mwb40")
+
+[node name="Ceiling2" type="StaticBody2D" parent="Walls" unique_id=1947295707]
+position = Vector2(613, 113)
+scale = Vector2(0.47, 1)
+
+[node name="ColorRect" type="ColorRect" parent="Walls/Ceiling2" unique_id=521324756]
+offset_left = -1.0
+offset_top = -146.0
+offset_right = 1154.0
+offset_bottom = 34.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Ceiling2" unique_id=2127029512]
+position = Vector2(577, -53)
+shape = SubResource("RectangleShape2D_mwb40")
+
+[node name="LeftWall" type="StaticBody2D" parent="Walls" unique_id=584442442]
+
+[node name="ColorRect" type="ColorRect" parent="Walls/LeftWall" unique_id=1584251303]
+offset_right = 100.0
+offset_bottom = 648.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall" unique_id=2098575796]
+position = Vector2(50, 323.5)
+shape = SubResource("RectangleShape2D_80nbo")
+
+[node name="RightWall" type="StaticBody2D" parent="Walls" unique_id=510364795]
+
+[node name="ColorRect" type="ColorRect" parent="Walls/RightWall" unique_id=1532236486]
+offset_left = 1056.0
+offset_right = 1156.0
+offset_bottom = 648.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall" unique_id=286062151]
+position = Vector2(1106, 324)
+shape = SubResource("RectangleShape2D_80nbo")
