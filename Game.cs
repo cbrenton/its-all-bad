@@ -12,6 +12,8 @@ public partial class Game : Node2D
   public Label WinLossLabel;
   [Export]
   public ColorRect BlackLayer;
+  [Export]
+  public Camera GameCamera;
 
   private bool IsGameWon = false;
   private Random Rand = new Random();
@@ -86,6 +88,10 @@ public partial class Game : Node2D
       player.InputEnabled = false;
     }
     FadeToBlack();
+  }
+
+  public void ShakeCamera(float duration, float strength) {
+    GameCamera.Shake(0.3f, 12f);
   }
 
   public void TryPickUpObject(Player player) {

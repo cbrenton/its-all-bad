@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ctcuk1f1ainm2" path="res://player.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://bij3pwg4vesxt" path="res://Game.cs" id="1_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://m4khmmu7opwa" path="res://gun.tscn" id="2_e2o6t"]
+[ext_resource type="Script" uid="uid://cl35pgephn0l1" path="res://Camera.cs" id="4_fc0e3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_fc0e3"]
 font_size = 32
@@ -13,12 +14,13 @@ size = Vector2(1155, 180)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_80nbo"]
 size = Vector2(100, 647)
 
-[node name="Node2D" type="Node2D" unique_id=1443946768 node_paths=PackedStringArray("WinLossLabel", "BlackLayer")]
+[node name="Node2D" type="Node2D" unique_id=1443946768 node_paths=PackedStringArray("WinLossLabel", "BlackLayer", "GameCamera")]
 script = ExtResource("1_fc0e3")
 PlayerScene = ExtResource("1_80nbo")
 GunScene = ExtResource("2_e2o6t")
 WinLossLabel = NodePath("HUD/WinLossLabel")
 BlackLayer = NodePath("CanvasLayer/BlackScreen")
+GameCamera = NodePath("Camera")
 
 [node name="Gun" parent="." unique_id=1734403121 groups=["gun"] instance=ExtResource("2_e2o6t")]
 visible = false
@@ -104,3 +106,7 @@ modulate = Color(1, 1, 1, 0)
 offset_right = 1154.0
 offset_bottom = 648.0
 color = Color(0, 0, 0, 1)
+
+[node name="Camera" type="Camera2D" parent="." unique_id=399108041]
+anchor_mode = 0
+script = ExtResource("4_fc0e3")

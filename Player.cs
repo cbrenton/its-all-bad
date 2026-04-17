@@ -116,6 +116,9 @@ public partial class Player : CharacterBody2D
       if (HeldGun.Shoot(this)) {
         EmitSignal(SignalName.WinSignal, this);
       }
+    } else {
+      // cast ray and see if it hits other player
+      // if it does, knock them back and make them drop the gun
     }
   }
 

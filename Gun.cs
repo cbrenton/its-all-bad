@@ -13,6 +13,9 @@ public partial class Gun : RigidBody2D
   private double FireCooldown;
   private AudioStreamPlayer2D Boing;
 
+  [Signal]
+  public delegate void ShakeSignalEventHandler(float duration, float strength);
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -30,6 +33,8 @@ public partial class Gun : RigidBody2D
          Boing.Play();
       }
     };
+
+    ShakeSignal += GetParent<Game>().ShakeCamera;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -65,6 +70,7 @@ public partial class Gun : RigidBody2D
           hitNode.Bleed(bloodDir);
         }
       }
+      EmitSignal(SignalName.ShakeSignal, 0.3f, 12f);
       AudioStreamPlayer2D gunshot = GetNodeOrNull<AudioStreamPlayer2D>("GunshotStream");
       gunshot.Play();
       GunAnimator.Play("gunshot");
