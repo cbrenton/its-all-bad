@@ -9,26 +9,35 @@ size = Vector2(30, 62)
 [node name="Player" type="CharacterBody2D" unique_id=130799084]
 script = ExtResource("1_4flbx")
 
-[node name="PickupArea" type="Area2D" parent="." unique_id=44348221]
+[node name="HurtArea2D" type="Area2D" parent="." unique_id=44348221]
+collision_layer = 2
+collision_mask = 0
 
-[node name="BodyRect" type="ColorRect" parent="PickupArea" unique_id=1067815747]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -15.0
-offset_top = -31.0
-offset_right = 15.0
-offset_bottom = 31.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 0.45490196, 0.4745098, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" unique_id=1489998083]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea2D" unique_id=1489998083]
 shape = SubResource("RectangleShape2D_7y1jj")
 
 [node name="PhysicalBody" type="CollisionShape2D" parent="." unique_id=1275464842]
 shape = SubResource("RectangleShape2D_7y1jj")
 
-[node name="Node2D" parent="." unique_id=1220416977 instance=ExtResource("2_onrkg")]
+[node name="Visuals" type="Node2D" parent="." unique_id=837071942]
+
+[node name="BodyRect" type="ColorRect" parent="Visuals" unique_id=1067815747]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.5
+offset_top = -31.5
+offset_right = 14.5
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.45490196, 0.4745098, 1)
+
+[node name="Fist" parent="Visuals" unique_id=1220416977 instance=ExtResource("2_onrkg")]
+visible = false
+position = Vector2(25, 0)
+
+[node name="HoldPosition" type="Node2D" parent="Visuals" unique_id=1772830536]
+position = Vector2(25, 0)

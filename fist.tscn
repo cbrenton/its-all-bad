@@ -3,8 +3,20 @@
 [ext_resource type="Script" uid="uid://bqpoqmfglo7jf" path="res://fist.gd" id="1_18rt0"]
 [ext_resource type="Texture2D" uid="uid://vqymet7qdv8r" path="res://assets/dummy.png" id="2_cqe2n"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cqe2n"]
+
 [node name="Node2D" type="Node2D" unique_id=1220416977]
 script = ExtResource("1_18rt0")
 
 [node name="2_delete" type="Sprite2D" parent="." unique_id=709337631]
 texture = ExtResource("2_cqe2n")
+
+[node name="HitArea2D" type="Area2D" parent="." unique_id=1882889643]
+collision_layer = 0
+collision_mask = 2
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D" unique_id=1063450611]
+shape = SubResource("RectangleShape2D_cqe2n")
+
+[connection signal="area_entered" from="HitArea2D" to="." method="_on_hit_area_2d_area_entered"]

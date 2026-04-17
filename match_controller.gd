@@ -25,10 +25,10 @@ func _spawn_players() -> void:
 		# set player pos and orientation
 		player.position = pos
 		print("initializing player")
-		player.initialize(player_num)
 		# TODO: connect player signals
 		# add child to scene graph
 		add_child(player)
+		player.initialize(player_num)
 		player_num += 1
 
 
