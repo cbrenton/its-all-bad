@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://1u117meuvbkt"]
+
+[ext_resource type="Script" uid="uid://bkmyn2c5f0saq" path="res://match_controller.gd" id="1_7y1jj"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7y1jj"]
+distance = -575.0
+
+[node name="Match" type="Node2D" unique_id=324995677]
+script = ExtResource("1_7y1jj")
+
+[node name="Environment" type="StaticBody2D" parent="." unique_id=292553992]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment" unique_id=41029597]
+shape = SubResource("WorldBoundaryShape2D_7y1jj")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Environment" unique_id=1115966598]
+shape = SubResource("WorldBoundaryShape2D_7y1jj")
