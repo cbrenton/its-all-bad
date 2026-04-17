@@ -10,7 +10,12 @@ var right_input: String
 var jump_input: String
 var action_input: String
 
+var fist: Weapon
+var weapon: Weapon
+
 var action_rate = 0.5
+
+var fist_scene = preload("res://fist.tscn")
 
 # TODO: delegate to weapon?
 var action_timer: Timer
@@ -29,6 +34,12 @@ func initialize(num: int) -> void:
 	self.action_timer.one_shot = true
 	add_child(self.action_timer)
 
+	# self.held_weapon = self.fist_scene.instantiate()
+	# add_child(self.held_weapon)
+	var fist = self.fist_scene.instantiate()
+	self.weapon = fist
+	add_child(fist)
+
 func _physics_process(delta: float) -> void:
 	# add gravity
 	if not is_on_floor():
@@ -45,7 +56,7 @@ func _handle_input() -> void:
 
 	# TODO: if action just pressed, check action cooldown and act
 	if Input.is_action_just_pressed(self.action_input):
-		_take_action()
+		self.weapon.attack()
 
 	# if left or right, apply force
 	# TODO: have different values for accel vs decel (friction)
@@ -55,9 +66,11 @@ func _handle_input() -> void:
 	else:
 		self.velocity.x = move_toward(velocity.x, 0, SPEED)
 
+"""
 func _take_action() -> void:
 	if self.action_timer.is_stopped():
 		print("boom")
 		self.action_timer.start(self.action_rate)
 	else:
 		print("not ready yet")
+"""

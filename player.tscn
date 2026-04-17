@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ckudr8chj1kgo"]
 
 [ext_resource type="Script" uid="uid://80kl10p8d3vr" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="PackedScene" uid="uid://cwit7dbkmqn7n" path="res://fist.tscn" id="2_onrkg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7y1jj"]
 size = Vector2(30, 62)
@@ -22,9 +23,12 @@ offset_right = 15.0
 offset_bottom = 31.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(1, 0.45490196, 0.4745098, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" unique_id=1489998083]
 shape = SubResource("RectangleShape2D_7y1jj")
 
 [node name="PhysicalBody" type="CollisionShape2D" parent="." unique_id=1275464842]
 shape = SubResource("RectangleShape2D_7y1jj")
+
+[node name="Node2D" parent="." unique_id=1220416977 instance=ExtResource("2_onrkg")]

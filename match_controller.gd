@@ -11,6 +11,7 @@ func _start_match() -> void:
 	# 	for each player, connect player.die to check_for_winner
 	# spawn gun, connect gun.shoot to spawn_bullet_delayed
 	# spawn bullet delayed
+	_spawn_players()
 	print("starting game")
 
 func _spawn_players() -> void:
@@ -23,6 +24,7 @@ func _spawn_players() -> void:
 		var player = self.player_scene.instantiate()
 		# set player pos and orientation
 		player.position = pos
+		print("initializing player")
 		player.initialize(player_num)
 		# TODO: connect player signals
 		# add child to scene graph
