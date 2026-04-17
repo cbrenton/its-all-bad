@@ -22,8 +22,6 @@ var knockback_x: float = 0.0
 var action_rate = 0.5
 
 var fist_scene = preload("fist.tscn")
-# TODO: delete
-var gun_scene = preload("gun.tscn")
 
 # takes in the player's number (1 for p1, 2 for p2, etc)
 func initialize(num: int) -> void:
@@ -37,11 +35,8 @@ func initialize(num: int) -> void:
 	self.action_input = "p%d_action" % num
 
 	self.fist = self.fist_scene.instantiate()
-	# self.fist = self.gun_scene.instantiate()
-	# self.weapon = self.fist
 	self.hold_position.add_child(self.fist)
 	self.fist.hit_landed.connect(attack)
-	# self.weapon.pick_up(self)
 
 func _physics_process(delta: float) -> void:
 	# add gravity
@@ -101,19 +96,23 @@ func receive_knockback(force: Vector2) -> void:
 
 func _on_hurt_area_2d_body_entered(body: Node2D) -> void:
 	# TODO: hacky - get parent node2d from rigidbody
-	print("body entered")
+	print("player body entered")
 	# TODO: revert, but for Item
-	# weapon = body as Weapon
-	weapon = body as Gun
-	if weapon:
+	var touched_weapon = body as Gun
+	if touched_weapon:
 		print("ran into weapon")
 		# TODO: do I need fist check?
 		# TODO: fix
-		if !weapon.is_held:
-			print("picking it pu")
-			_pick_up(weapon)
+		if !touched_weapon.is_held():
+			if !touched_weapon.is_thrown:
+				print("picking it pu")
+				_pick_up(touched_weapon)
+			else:
+				touched_weapon.apply_central_impulse(Vector2(200, -200))
 
-func _pick_up(gun: Gun):
+func _pick_up(gun: Gun) -> void:
 	gun._on_pickup(self)
-	# weapon.move_to(self)
 	self.weapon = gun
+
+func clear_weapon() -> void:
+	self.weapon = null
