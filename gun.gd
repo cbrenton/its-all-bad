@@ -19,6 +19,7 @@ func _ready() -> void:
 	self.contact_monitor = true
 	self.max_contacts_reported = 4
 	body_entered.connect(_on_body_entered)
+	self.continuous_cd = RigidBody2D.CCD_MODE_CAST_SHAPE
 
 func _on_pickup(player: Player) -> void:
 	self.holder = player
