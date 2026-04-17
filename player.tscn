@@ -10,8 +10,8 @@ size = Vector2(30, 62)
 script = ExtResource("1_4flbx")
 
 [node name="HurtArea2D" type="Area2D" parent="." unique_id=44348221]
-collision_layer = 2
-collision_mask = 0
+collision_layer = 6
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea2D" unique_id=1489998083]
 shape = SubResource("RectangleShape2D_7y1jj")
@@ -41,3 +41,5 @@ position = Vector2(25, 0)
 
 [node name="HoldPosition" type="Node2D" parent="Visuals" unique_id=1772830536]
 position = Vector2(25, 0)
+
+[connection signal="body_entered" from="HurtArea2D" to="." method="_on_hurt_area_2d_body_entered"]

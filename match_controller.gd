@@ -1,7 +1,8 @@
 extends Node2D
 
 
-@export var player_scene = preload("res://player.tscn")
+@export var player_scene = preload("player.tscn")
+@export var gun_scene = preload("gun.tscn")
 
 func _ready() -> void:
 	_start_match()
@@ -12,6 +13,7 @@ func _start_match() -> void:
 	# spawn gun, connect gun.shoot to spawn_bullet_delayed
 	# spawn bullet delayed
 	_spawn_players()
+	_spawn_gun()
 	print("starting game")
 
 func _spawn_players() -> void:
@@ -31,7 +33,9 @@ func _spawn_players() -> void:
 		player.initialize(player_num)
 		player_num += 1
 
-
+func _spawn_gun():
+	self.gun_scene.instantiate()
+	pass
 
 func _check_for_winner() -> void:
 	# brief async - delete players, gun, bullet

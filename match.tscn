@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://1u117meuvbkt"]
 
 [ext_resource type="Script" uid="uid://bkmyn2c5f0saq" path="res://match_controller.gd" id="1_7y1jj"]
+[ext_resource type="PackedScene" uid="uid://dw35m80pwgo1u" path="res://gun.tscn" id="2_x8et2"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7y1jj"]
 distance = -575.0
@@ -15,3 +16,6 @@ shape = SubResource("WorldBoundaryShape2D_7y1jj")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Environment" unique_id=1115966598]
 shape = SubResource("WorldBoundaryShape2D_7y1jj")
+
+[node name="Gun" parent="." unique_id=1870697106 instance=ExtResource("2_x8et2")]
+position = Vector2(300, 0)
