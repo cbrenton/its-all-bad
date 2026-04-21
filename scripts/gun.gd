@@ -5,6 +5,7 @@ signal hit_landed(target, is_fatal)
 signal shot
 
 @onready var raycast: RayCast2D = $HitRay2D
+@onready var gunshot_sound: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 # TODO: start false
 var is_loaded: bool = true
@@ -50,6 +51,7 @@ func drop() -> void:
 
 func _fire() -> void:
     if self.is_loaded:
+        self.gunshot_sound.play()
         if raycast.is_colliding():
             print("bam!")
             var other = self.raycast.get_collider() as Player
@@ -67,7 +69,6 @@ func _throw() -> void:
     drop()
     self.is_thrown = true
     apply_central_impulse(Vector2(look_dir * 2000, -20))
-    pass
 
 
 func attack() -> void:
@@ -78,7 +79,6 @@ func attack() -> void:
     if self.attack_timer.is_stopped():
         _fire()
         self.attack_timer.start(self.attack_rate)
-    pass
 
 
 func _on_body_entered(body: Node) -> void:
@@ -96,7 +96,6 @@ func _on_body_entered(body: Node) -> void:
         player.receive_knockback(Vector2(dir_to_target * knockback_force, -200))
     else:
         print("gun hit %s" % body.name)
-    pass  # Replace with function body.
 
 
 func is_held() -> bool:

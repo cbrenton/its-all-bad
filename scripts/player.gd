@@ -77,7 +77,6 @@ func _handle_movement_input() -> void:
 
 func _handle_non_movement_input() -> void:
     if Input.is_action_just_pressed(self.action_input):
-        breakpoint
         if self.weapon != null:
             self.weapon.attack()
         else:

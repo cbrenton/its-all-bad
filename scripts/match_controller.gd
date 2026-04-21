@@ -26,7 +26,6 @@ func _spawn_players() -> void:
     var player_num = 1
     for pos in player_positions:
         # instantiate player
-        breakpoint
         var player = self.player_scene.instantiate()
         # set player pos and orientation
         player.position = pos
