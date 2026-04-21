@@ -2,6 +2,10 @@
 
 [ext_resource type="Script" uid="uid://80kl10p8d3vr" path="res://scripts/player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://cwit7dbkmqn7n" path="res://scenes/fist.tscn" id="2_onrkg"]
+[ext_resource type="Script" uid="uid://bfied8f76qv1k" path="res://scripts/components/input_component.gd" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://jf7qnjvf4ga5" path="res://scripts/components/movement_component.gd" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://dkcrffc5dmqb6" path="res://scripts/components/inventory_component.gd" id="5_qlg0r"]
+[ext_resource type="Script" uid="uid://hody3580uyrh" path="res://scripts/components/hurtbox_component.gd" id="6_tuyoq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7y1jj"]
 size = Vector2(30, 62)
@@ -36,10 +40,31 @@ grow_vertical = 2
 color = Color(1, 0.45490196, 0.4745098, 1)
 
 [node name="Fist" parent="Visuals" unique_id=1220416977 instance=ExtResource("2_onrkg")]
-visible = false
 position = Vector2(25, 0)
 
 [node name="HoldPosition" type="Node2D" parent="Visuals" unique_id=1772830536]
 position = Vector2(25, 0)
 
-[connection signal="body_entered" from="HurtArea2D" to="." method="_on_hurt_area_2d_body_entered"]
+[node name="InputComponent" type="Node" parent="." unique_id=103914872]
+unique_name_in_owner = true
+script = ExtResource("3_qhqgy")
+metadata/_custom_type_script = "uid://bfied8f76qv1k"
+
+[node name="MovementComponent" type="Node" parent="." unique_id=505115723 node_paths=PackedStringArray("body", "visuals")]
+unique_name_in_owner = true
+script = ExtResource("4_dqkch")
+body = NodePath("..")
+visuals = NodePath("../Visuals")
+metadata/_custom_type_script = "uid://jf7qnjvf4ga5"
+
+[node name="InventoryComponent" type="Node" parent="." unique_id=1412043360 node_paths=PackedStringArray("hold_position")]
+unique_name_in_owner = true
+script = ExtResource("5_qlg0r")
+hold_position = NodePath("../Visuals/HoldPosition")
+metadata/_custom_type_script = "uid://dkcrffc5dmqb6"
+
+[node name="HurtBoxComponent" type="Node" parent="." unique_id=1342501107 node_paths=PackedStringArray("hurt_area")]
+unique_name_in_owner = true
+script = ExtResource("6_tuyoq")
+hurt_area = NodePath("../HurtArea2D")
+metadata/_custom_type_script = "uid://hody3580uyrh"

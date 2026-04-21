@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://dw35m80pwgo1u"]
 
-[ext_resource type="Script" uid="uid://7y5l7tnllp4b" path="res://scripts/gun.gd" id="1_x77fm"]
+[ext_resource type="Script" uid="uid://7y5l7tnllp4b" path="res://scripts/gun_old.gd" id="1_x77fm"]
 [ext_resource type="AudioStream" uid="uid://cgaq4yis3j00w" path="res://assets/gunshot.mp3" id="2_og67c"]
+[ext_resource type="Script" uid="uid://c1atb6we1awe1" path="res://scripts/items/gun.gd" id="3_gp1hk"]
+[ext_resource type="Script" uid="uid://bs4l42rfwyx54" path="res://scripts/components/collectible_component.gd" id="4_qd4js"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r8ywq"]
 size = Vector2(29, 8)
@@ -40,3 +42,11 @@ target_position = Vector2(1000000, 0)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1480686199]
 stream = ExtResource("2_og67c")
+
+[node name="Gun" type="Node" parent="." unique_id=1879621809]
+script = ExtResource("3_gp1hk")
+metadata/_custom_type_script = "uid://c1atb6we1awe1"
+
+[node name="CollectibleComponent" type="Node" parent="." unique_id=303832060]
+script = ExtResource("4_qd4js")
+metadata/_custom_type_script = "uid://bs4l42rfwyx54"

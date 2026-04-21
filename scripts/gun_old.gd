@@ -1,6 +1,7 @@
-class_name Gun
+class_name GunOld
 extends RigidBody2D
 
+"""
 signal hit_landed(target, is_fatal)
 signal shot
 
@@ -100,3 +101,4 @@ func _on_body_entered(body: Node) -> void:
 
 func is_held() -> bool:
     return self.holder != null
+"""

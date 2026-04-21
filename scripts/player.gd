@@ -19,6 +19,13 @@ var knockback_x: float = 0.0
 
 @onready var visuals: Node2D = $Visuals
 @onready var hold_position: Node2D = $Visuals/HoldPosition
+@onready var input_component: InputComponent = %InputComponent
+@onready var movement_component: MovementComponent = %MovementComponent
+@onready var inventory_component: InventoryComponent = %InventoryComponent
+@onready var hurtbox_component: HurtBoxComponent = %HurtBoxComponent
+
+# TODO: delet
+@onready var gun_scene = preload("res://scenes/gun.tscn")
 
 var action_rate = 0.5
 
@@ -28,20 +35,26 @@ var fist_scene = preload("res://scenes/fist.tscn")
 # takes in the player's number (1 for p1, 2 for p2, etc)
 func initialize(num: int) -> void:
     # store player number
-    self.player_number = num
+    player_number = num
 
-    # set up listeners
-    self.left_input = "p%d_left" % num
-    self.right_input = "p%d_right" % num
-    self.jump_input = "p%d_jump" % num
-    self.action_input = "p%d_action" % num
+    input_component.initialize(num)
 
-    self.fist = self.fist_scene.instantiate()
-    self.hold_position.add_child(self.fist)
-    self.fist.hit_landed.connect(attack)
+    # set up player's signal listeners
+    hurtbox_component.pickup_item.connect(inventory_component.pickup)
 
 
 func _physics_process(delta: float) -> void:
+    input_component.update()
+
+    movement_component.direction_x = input_component.movement_x
+    movement_component.wants_jump = input_component.jump_pressed
+    movement_component.tick(delta)
+
+    inventory_component.look_dir_x = movement_component.look_dir_x
+    if input_component.action_pressed:
+        inventory_component.shoot()
+
+    """
     # add gravity
     if not is_on_floor():
         self.velocity.y += get_gravity().y * delta
@@ -56,8 +69,10 @@ func _physics_process(delta: float) -> void:
     _handle_non_movement_input()
 
     move_and_slide()
+    """
 
 
+"""
 func _handle_movement_input() -> void:
     if Input.is_action_just_pressed(self.jump_input) and is_on_floor():
         self.velocity.y = JUMP_VELOCITY
@@ -100,34 +115,4 @@ func attack(target: Player, is_fatal: bool) -> void:
 func receive_knockback(force: Vector2) -> void:
     self.knockback_x = force.x
     self.velocity.y = force.y
-
-
-func _on_hurt_area_2d_body_entered(body: Node2D) -> void:
-    # TODO: hacky - get parent node2d from rigidbody
-    print("player body entered")
-    # TODO: revert, but for Item
-    var touched_weapon = body as Gun
-    if touched_weapon:
-        print("ran into weapon")
-        # TODO: do I need fist check?
-        # TODO: fix
-        if !touched_weapon.is_held():
-            if !touched_weapon.is_thrown:
-                print("picking it pu")
-                _pick_up(touched_weapon)
-            else:
-                touched_weapon.apply_central_impulse(Vector2(200, -200))
-        return
-    var touched_bullet = body as Bullet
-    if touched_bullet:
-        print("picked up bullet")
-        touched_bullet.queue_free()
-
-
-func _pick_up(gun: Gun) -> void:
-    gun._on_pickup(self)
-    self.weapon = gun
-
-
-func clear_weapon() -> void:
-    self.weapon = null
+"""

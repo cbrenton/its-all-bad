@@ -1,0 +1,1 @@
+class_name CollectibleComponent extends Node
