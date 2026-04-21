@@ -1,7 +1,8 @@
 class_name Gun
 extends RigidBody2D
 
-signal hit_landed(target, is_fataFl)
+signal hit_landed(target, is_fatal)
+signal shot
 
 @onready var raycast: RayCast2D = $HitRay2D
 
@@ -48,8 +49,9 @@ func _fire() -> void:
 			print("bam!")
 			var other = self.raycast.get_collider() as Player
 			if other:
-				hit_landed.emit(other, true)
+				self.hit_landed.emit(other, true)
 		self.is_loaded = false
+		self.shot.emit()
 	else:
 		_throw()
 

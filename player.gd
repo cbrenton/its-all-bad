@@ -1,6 +1,7 @@
 class_name Player
 extends CharacterBody2D
 
+signal die(player: Player)
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -86,6 +87,7 @@ func attack(target: Player, is_fatal: bool) -> void:
 	if !is_fatal:
 		target.receive_knockback(Vector2(dir_to_target * knockback_force, -200) + self.velocity)
 	else:
+		target.die.emit(target)
 		print("game over")
 
 # reset velocity.y to received force, and set knockback_x which will decay
@@ -109,6 +111,11 @@ func _on_hurt_area_2d_body_entered(body: Node2D) -> void:
 				_pick_up(touched_weapon)
 			else:
 				touched_weapon.apply_central_impulse(Vector2(200, -200))
+		return
+	var touched_bullet = body as Bullet
+	if touched_bullet:
+		print("picked up bullet")
+		touched_bullet.queue_free()
 
 func _pick_up(gun: Gun) -> void:
 	gun._on_pickup(self)
