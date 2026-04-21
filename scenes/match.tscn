@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://1u117meuvbkt"]
 
-[ext_resource type="Script" uid="uid://bkmyn2c5f0saq" path="res://match_controller.gd" id="1_7y1jj"]
-[ext_resource type="PackedScene" uid="uid://dw35m80pwgo1u" path="res://gun.tscn" id="2_x8et2"]
+[ext_resource type="Script" uid="uid://bkmyn2c5f0saq" path="res://scripts/match_controller.gd" id="1_7y1jj"]
+[ext_resource type="PackedScene" uid="uid://dw35m80pwgo1u" path="res://scenes/gun.tscn" id="2_x8et2"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7y1jj"]
 distance = -575.0
@@ -14,6 +14,9 @@ size = Vector2(555, 122.5)
 
 [node name="Match" type="Node2D" unique_id=324995677]
 script = ExtResource("1_7y1jj")
+player_scene = null
+gun_scene = null
+bullet_scene = null
 
 [node name="Environment" type="StaticBody2D" parent="." unique_id=292553992]
 
