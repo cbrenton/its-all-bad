@@ -1,4 +1,4 @@
-class_name Bullet extends Node
+class_name Bullet extends RigidBody2D
 
 
 func shoot() -> void:

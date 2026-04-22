@@ -35,7 +35,7 @@ func _physics_process(delta: float) -> void:
 
     inventory_component.look_dir_x = movement_component.look_dir_x
     if input_component.action_pressed:
-        inventory_component.shoot()
+        inventory_component.use_held_weapon()
 
     """
     # add gravity

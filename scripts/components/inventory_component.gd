@@ -24,7 +24,7 @@ func pickup(item: Node):
         weapon = item
 
         _pickup.call_deferred(item)
-        grabbed_gun.yeet.connect(drop)
+        grabbed_gun.yeet.connect(_drop)
         var rb = item as RigidBody2D
         rb.collision_layer = 0
         rb.collision_mask = 0
@@ -47,13 +47,13 @@ func _pickup(item: Node) -> void:
     item.rotation = 0
 
 
-func drop() -> void:
+func _drop() -> void:
     var gun = weapon as Gun
     if gun:
         weapon.freeze = false
         weapon.reparent(get_tree().current_scene)
         weapon.apply_central_impulse(Vector2(look_dir_x * 2000, -20))
-        gun.yeet.disconnect(drop)
+        gun.yeet.disconnect(_drop)
 
         var rb = weapon as RigidBody2D
         rb.collision_layer = 4
@@ -61,7 +61,7 @@ func drop() -> void:
         weapon = null
 
 
-func shoot() -> void:
+func use_held_weapon() -> void:
     var gun = weapon as Gun
     if gun:
         gun.shoot()
