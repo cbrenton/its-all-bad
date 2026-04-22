@@ -15,4 +15,4 @@ func on_body_entered(body: Node) -> void:
     print("hit something")
     if body.get_node_or_null("CollectibleComponent"):
         print("picking up something")
-        pickup_item.emit.call_deferred(body)
+        pickup_item.emit(body)

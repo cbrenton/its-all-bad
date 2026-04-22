@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://ctp0o18g7yp8p"]
 
 [ext_resource type="Texture2D" uid="uid://vqymet7qdv8r" path="res://assets/dummy.png" id="1_v7oki"]
-[ext_resource type="Script" uid="uid://bd7olucnbmqy0" path="res://scripts/bullet_old.gd" id="1_v8qja"]
 [ext_resource type="Script" uid="uid://cgdbkslh2jiid" path="res://scripts/items/bullet.gd" id="3_l5glv"]
 [ext_resource type="Script" uid="uid://bs4l42rfwyx54" path="res://scripts/components/collectible_component.gd" id="4_eoqba"]
 
@@ -10,17 +9,13 @@ radius = 4.1231055
 
 [node name="RigidBody2D" type="RigidBody2D" unique_id=1887485202]
 collision_layer = 4
-script = ExtResource("1_v8qja")
+script = ExtResource("3_l5glv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=333352033]
 shape = SubResource("CircleShape2D_x8et2")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2100329097]
 texture = ExtResource("1_v7oki")
-
-[node name="Bullet" type="Node" parent="." unique_id=1694432503]
-script = ExtResource("3_l5glv")
-metadata/_custom_type_script = "uid://cgdbkslh2jiid"
 
 [node name="CollectibleComponent" type="Node" parent="." unique_id=522231862]
 script = ExtResource("4_eoqba")

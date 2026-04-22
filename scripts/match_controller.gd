@@ -37,14 +37,14 @@ func _spawn_players() -> void:
 
 
 func _spawn_gun():
-    var gun_body = self.gun_scene.instantiate()
-    gun_body.position = Vector2(571, 0)
-    gun_body.rotation = rng.randi_range(0, 360)
-    gun_body.apply_central_impulse(Vector2(rng.randi_range(50, 100), 20))
+    var gun = self.gun_scene.instantiate()
+    # gun.position = Vector2(571, 0)
+    gun.position = Vector2(371, 100)
+    gun.rotation = rng.randi_range(0, 360)
+    gun.apply_central_impulse(Vector2(rng.randi_range(50, 100), 20))
 
-    var gun = gun_body.get_node_or_null("Gun") as Gun
     gun.shot.connect(_spawn_bullet)
-    add_child(gun_body)
+    add_child(gun)
 
 
 func _spawn_bullet():

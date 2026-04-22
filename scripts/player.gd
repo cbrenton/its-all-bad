@@ -3,17 +3,7 @@ extends CharacterBody2D
 
 signal die(player: Player)
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
-
 var player_number: int
-var left_input: String
-var right_input: String
-var jump_input: String
-var action_input: String
-
-var fist: Fist
-var weapon: Gun
 
 var knockback_x: float = 0.0
 
@@ -23,13 +13,6 @@ var knockback_x: float = 0.0
 @onready var movement_component: MovementComponent = %MovementComponent
 @onready var inventory_component: InventoryComponent = %InventoryComponent
 @onready var hurtbox_component: HurtBoxComponent = %HurtBoxComponent
-
-# TODO: delet
-@onready var gun_scene = preload("res://scenes/gun.tscn")
-
-var action_rate = 0.5
-
-var fist_scene = preload("res://scenes/fist.tscn")
 
 
 # takes in the player's number (1 for p1, 2 for p2, etc)

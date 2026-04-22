@@ -1,4 +1,4 @@
-class_name Gun extends Node
+class_name Gun extends RigidBody2D
 
 var is_loaded := false
 

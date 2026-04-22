@@ -21,9 +21,6 @@ func tick(delta: float) -> void:
     if not body.is_on_floor():
         body.velocity.y += body.get_gravity().y * delta * gravity_multiplier
 
-    if wants_jump:
-        print("boing!")
-
     # jump
     if wants_jump and body.is_on_floor():
         body.velocity.y = jump_velocity
