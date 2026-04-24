@@ -1,6 +1,7 @@
 class_name InventoryComponent extends Node
 
 var weapon: Node = null
+var default_weapon: Node = null
 @export var hold_position: Node2D
 var look_dir_x := 0.0
 var has_loose_bullet := false

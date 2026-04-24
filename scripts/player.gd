@@ -15,6 +15,10 @@ var knockback_x: float = 0.0
 @onready var hurtbox_component: HurtBoxComponent = %HurtBoxComponent
 
 
+func _ready() -> void:
+    add_to_group("players")
+
+
 # takes in the player's number (1 for p1, 2 for p2, etc)
 func initialize(num: int) -> void:
     # store player number
@@ -36,6 +40,12 @@ func _physics_process(delta: float) -> void:
     inventory_component.look_dir_x = movement_component.look_dir_x
     if input_component.action_pressed:
         inventory_component.use_held_weapon()
+
+
+func take_damage(recipient: Player):
+    if recipient == self:
+        print("player %d taking damage", player_number)
+        die.emit(self)
 
     """
     # add gravity
