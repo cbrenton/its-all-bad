@@ -1,22 +1,24 @@
 [gd_scene format=3 uid="uid://cwit7dbkmqn7n"]
 
-[ext_resource type="Script" uid="uid://bqpoqmfglo7jf" path="res://scripts/fist.gd" id="1_18rt0"]
-[ext_resource type="Texture2D" uid="uid://vqymet7qdv8r" path="res://assets/dummy.png" id="2_cqe2n"]
+[ext_resource type="Script" uid="uid://bgmit61dualdr" path="res://scripts/items/fist.gd" id="1_blqjd"]
+[ext_resource type="AudioStream" uid="uid://cgaq4yis3j00w" path="res://assets/gunshot.mp3" id="2_ahl7n"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cqe2n"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_og67c"]
 
-[node name="Node2D" type="Node2D" unique_id=1220416977]
-script = ExtResource("1_18rt0")
+[node name="Node2D" type="Node2D" unique_id=509131475]
+script = ExtResource("1_blqjd")
 
-[node name="2_delete" type="Sprite2D" parent="." unique_id=709337631]
-texture = ExtResource("2_cqe2n")
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1480686199]
+stream = ExtResource("2_ahl7n")
 
-[node name="HitArea2D" type="Area2D" parent="." unique_id=1882889643]
-collision_layer = 0
+[node name="HitArea2D" type="Area2D" parent="." unique_id=1840073658]
 collision_mask = 2
-monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D" unique_id=1063450611]
-shape = SubResource("RectangleShape2D_cqe2n")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D" unique_id=1819145442]
+shape = SubResource("RectangleShape2D_og67c")
 
-[connection signal="area_entered" from="HitArea2D" to="." method="_on_hit_area_2d_area_entered"]
+[node name="ColorRect" type="ColorRect" parent="HitArea2D" unique_id=1079445323]
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0

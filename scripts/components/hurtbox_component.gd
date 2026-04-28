@@ -12,7 +12,11 @@ func _ready() -> void:
 
 
 func on_body_entered(body: Node) -> void:
-    print("hit something")
-    if body.get_node_or_null("CollectibleComponent"):
-        print("picking up something")
+    # print("hit something")
+    var collectible_component = (
+        body.get_node_or_null("CollectibleComponent") as CollectibleComponent
+    )
+
+    if collectible_component:
+        # print("picking up something")
         pickup_item.emit(body)

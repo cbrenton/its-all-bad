@@ -1,11 +1,19 @@
 class_name Gun extends RigidBody2D
 
 var is_loaded := false
+var just_thrown := false
 @onready var hit_ray = $HitRay2D
+@onready var collectible_component = %CollectibleComponent
 
 signal shot
 signal yeet
 signal damage
+
+
+func _ready() -> void:
+    contact_monitor = true
+    max_contacts_reported = 4
+    body_entered.connect(_on_body_entered)
 
 
 func shoot() -> void:
@@ -26,3 +34,16 @@ func _check_for_hit() -> void:
         var other_player = collider as Player
         if other_player:
             damage.emit(other_player)
+
+
+func _on_body_entered(body: Node) -> void:
+    print("FOO")
+    if body is Player:
+        print("FOO player")
+        if collectible_component.just_thrown:
+            print("FOO just thrown")
+            if body is Player:
+                print("FOO hit player")
+                body.receive_knockback(Vector2(linear_velocity.x, -300))
+    elif body.name == "Ground":
+        collectible_component.just_thrown = false

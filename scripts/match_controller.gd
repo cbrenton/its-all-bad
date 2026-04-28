@@ -25,6 +25,7 @@ func _spawn_players() -> void:
     var player_positions = [Vector2(200, 500), Vector2(800, 500)]
 
     var player_num = 1
+    var colors = {1: Color.RED, 2: Color.BLUE}
     for pos in player_positions:
         # instantiate player
         var player = self.player_scene.instantiate()
@@ -33,8 +34,17 @@ func _spawn_players() -> void:
         # TODO: connect player signals
         add_child(player)
         player.initialize(player_num)
+        player.get_node("Visuals/BodyRect").color = colors[player_num]
         player_num += 1
         player.die.connect(_check_for_winner)
+        player.inventory_component.default_weapon.punch_landed.connect(foo)
+
+
+func foo(target: Player, attack_dir_x: float):
+    print("POW %d" % attack_dir_x)
+    target.inventory_component.drop(attack_dir_x)
+    # TODO: make this scale with velocity
+    target.receive_knockback(Vector2(attack_dir_x * 400, -400))
 
 
 func _spawn_gun():

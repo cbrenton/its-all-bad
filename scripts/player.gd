@@ -42,6 +42,11 @@ func _physics_process(delta: float) -> void:
         inventory_component.use_held_weapon()
 
 
+func receive_knockback(force: Vector2) -> void:
+    movement_component.knockback_x = force.x
+    velocity.y = force.y
+
+
 func take_damage(recipient: Player):
     if recipient == self:
         print("player %d taking damage", player_number)

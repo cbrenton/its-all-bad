@@ -9,10 +9,13 @@ class_name MovementComponent extends Node
 var direction_x := 0.0
 var wants_jump := false
 var look_dir_x := 0.0
+var knockback_x := 0.0
 
 
 func tick(delta: float) -> void:
-    body.velocity.x = direction_x * speed
+    knockback_x = move_toward(knockback_x, 0, 800 * delta)
+
+    body.velocity.x = direction_x * speed + knockback_x
     if body.velocity.x != 0.0:
         look_dir_x = sign(body.velocity.x)
         visuals.scale.x = look_dir_x
