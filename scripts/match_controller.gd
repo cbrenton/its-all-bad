@@ -4,6 +4,7 @@ extends Node2D
 @onready var gun_scene = preload("res://scenes/gun.tscn")
 @onready var bullet_scene = preload("res://scenes/bullet.tscn")
 @onready var win_label = %WinLabel
+@onready var game_camera = %GameCamera
 
 var rng = RandomNumberGenerator.new()
 
@@ -41,6 +42,7 @@ func _spawn_players() -> void:
 
 
 func foo(target: Player, attack_dir_x: float):
+    game_camera.shake(0.2, 5)
     print("POW %d" % attack_dir_x)
     target.inventory_component.drop(attack_dir_x)
     # TODO: make this scale with velocity
@@ -58,7 +60,12 @@ func _spawn_gun():
     gun.shot.connect(_spawn_bullet)
     for player in get_tree().get_nodes_in_group("players"):
         gun.damage.connect(player.take_damage)
+        gun.boing.connect(_shake_camera)
     add_child(gun)
+
+
+func _shake_camera(strength: float):
+    game_camera.shake(0.1, strength)
 
 
 func _spawn_bullet():

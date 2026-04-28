@@ -8,6 +8,7 @@ var just_thrown := false
 signal shot
 signal yeet
 signal damage
+signal boing(strength: float)
 
 
 func _ready() -> void:
@@ -45,5 +46,7 @@ func _on_body_entered(body: Node) -> void:
             if body is Player:
                 print("FOO hit player")
                 body.receive_knockback(Vector2(linear_velocity.x, -300))
+                print(linear_velocity.length())
+                boing.emit(linear_velocity.length() / 500)
     elif body.name == "Ground":
         collectible_component.just_thrown = false

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://1u117meuvbkt"]
 
 [ext_resource type="Script" uid="uid://bkmyn2c5f0saq" path="res://scripts/match_controller.gd" id="1_7y1jj"]
+[ext_resource type="Script" uid="uid://bsavum534vd7n" path="res://scripts/game_camera.gd" id="2_t0cgm"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7y1jj"]
 distance = -575.0
@@ -85,3 +86,8 @@ grow_vertical = 2
 text = "foo"
 label_settings = SubResource("LabelSettings_80q71")
 horizontal_alignment = 1
+
+[node name="GameCamera" type="Camera2D" parent="." unique_id=2021443694]
+unique_name_in_owner = true
+position = Vector2(577, 331)
+script = ExtResource("2_t0cgm")
